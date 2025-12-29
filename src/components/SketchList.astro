@@ -1,0 +1,41 @@
+---
+interface TreeNode {
+  name: string;
+  path?: string;
+  children?: TreeNode[];
+}
+
+interface Props {
+  tree: TreeNode[];
+  depth?: number;
+}
+
+const { tree, depth = 0 } = Astro.props;
+
+const depthStyles = [
+  "text-xl font-bold",
+  "text-base font-bold",
+  "text-base",
+  "text-sm",
+];
+const styleClass = depthStyles[Math.min(depth, depthStyles.length - 1)];
+---
+
+<ul>
+  {
+    tree.map((node) => (
+      <li>
+        {node.children ? (
+          <details open>
+            <summary class={`cursor-pointer ${styleClass}`}>
+              {node.name}
+            </summary>
+            <Astro.self tree={node.children} depth={depth + 1} />
+          </details>
+        ) : (
+          <a href={`/sketches/${node.path}`}>{node.name}</a>
+        )}
+      </li>
+    ))
+  }
+</ul>
