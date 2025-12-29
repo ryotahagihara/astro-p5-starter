@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Code } from "astro:components";
+import fs from "fs";
+
+export function getStaticPaths() {
+  const sketches = import.meta.glob("/src/sketches/**/*.ts");
+
+  return Object.keys(sketches)
+    .filter((path) => !path.split("/").some((part) => part.startsWith("_")))
+    .map((path) => {
+      const slug = path.replace("/src/sketches/", "").replace(/\.ts$/, "");
+      return { params: { slug } };
+    });
+}
+
+const { slug } = Astro.params;
+
+const modules: Record<string, string> = import.meta.glob(
+  "/src/sketches/**/*.ts",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+);
+
+const targetPath = `/src/sketches/${slug}.ts`;
+const sketchUrl = modules[targetPath];
+
+const code = fs.readFileSync(`src/sketches/${slug}.ts`, "utf-8");
+---
+
+<Layout title={slug}>
+  <h2 class="break-all">{slug}.ts</h2>
+  <div id="sketch-container"></div>
+  <Code code={code} lang="typescript" />
+</Layout>
+
+<script is:inline type="module" src={sketchUrl}></script>
+
+<style is:global>
+  canvas {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
+    height: auto !important;
+    border: 1px solid #e5e7eb;
+  }
+</style>
