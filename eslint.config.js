@@ -12,6 +12,10 @@ export default defineConfig([
     extends: ["js/recommended"],
     languageOptions: { globals: globals.browser },
   },
+  {
+    files: ["scripts/**/*.js"],
+    languageOptions: { globals: globals.node },
+  },
   tseslint.configs.recommended,
   eslintPluginAstro.configs.recommended,
   eslintPluginAstro.configs["jsx-a11y-recommended"],
