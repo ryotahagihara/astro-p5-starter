@@ -15,29 +15,28 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-
-const modules: Record<string, string> = import.meta.glob(
-  "/src/sketches/**/*.ts",
-  {
-    eager: true,
-    query: "?url",
-    import: "default",
-  },
-);
-
-const targetPath = `/src/sketches/${slug}.ts`;
-const sketchUrl = modules[targetPath];
-
 const code = fs.readFileSync(`src/sketches/${slug}.ts`, "utf-8");
 ---
 
 <Layout title={slug}>
   <h2 class="break-all">{slug}.ts</h2>
-  <div id="sketch-container"></div>
+  <div id="sketch-container" data-slug={slug}></div>
   <Code code={code} lang="typescript" />
 </Layout>
 
-<script is:inline type="module" src={sketchUrl}></script>
+<script>
+  const container = document.getElementById("sketch-container");
+  const slug = container?.dataset.slug;
+
+  if (slug) {
+    const modules = import.meta.glob("/src/sketches/**/*.ts");
+    const modulePath = `/src/sketches/${slug}.ts`;
+
+    if (modules[modulePath]) {
+      modules[modulePath]();
+    }
+  }
+</script>
 
 <style is:global>
   canvas {
