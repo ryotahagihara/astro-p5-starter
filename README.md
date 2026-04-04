@@ -11,7 +11,7 @@
 
 ## Minimal Setup for p5.js Development
 
-This is a starter kit for developing p5.js sketches with TypeScript. Built on Astro v5, it eliminates the initial environment setup, allowing you to focus immediately on creative coding. Sketches are portable to other creative coding platforms.
+This is a starter kit for developing p5.js sketches with TypeScript. Built on Astro v6, it eliminates the initial environment setup, allowing you to focus immediately on creative coding. Sketches are portable to other creative coding platforms.
 
 [![Use this template](https://img.shields.io/badge/use_this_template-197935?style=for-the-badge&logo=github&logoColor=white)](https://github.com/new?template_name=astro-p5-starter&template_owner=ryotahagihara)
 [![View on GitHub](https://img.shields.io/badge/view_on_github-1f2328?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ryotahagihara/astro-p5-starter)
@@ -240,7 +240,7 @@ npm run new-sketch <path> [template]
 | Tech               | Description                                     |
 | ------------------ | ----------------------------------------------- |
 | p5.js              | A JavaScript library for creative coding        |
-| Astro v5           | The web framework for content-driven websites   |
+| Astro v6           | The web framework for content-driven websites   |
 | TypeScript         | JavaScript with syntax for types                |
 | Tailwind CSS v4    | A utility-first CSS framework                   |
 | Cloudflare Workers | Serverless platform running on a global network |
@@ -270,4 +270,4 @@ Keeping it is optional but greatly appreciated! It helps others discover this te
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-Copyright &copy; 2025 [Ryota Hagihara](https://www.ryotahagihara.com/) All rights reserved.
+Copyright &copy; 2025 [Ryota Hagihara](https://www.ryotahagihara.com/)
